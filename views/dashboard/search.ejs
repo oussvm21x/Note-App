@@ -1,0 +1,51 @@
+<div class="container-fluid container-fluid-costum pb-5 mb-5">
+    <div class="row mb-4">
+        <div class="col ">
+            <h1 class=" text-start">Hey, <%= local.username %>
+            </h1>
+        </div>
+
+    </div>
+    <div class="row g-3 mb-4">
+        <% if (searchResults.length> 0) { %>
+            <% searchResults.forEach(note=> { %>
+                <div class="col-md-3">
+                    <a href="/dashboard/item/<%= note._id %> " class="text-decoration-none h-100">
+                        <div class="card mb-4 h-100">
+                            <div class="card-body border-primary">
+                                <h5 class="card-title">
+                                    <%= note.title %>
+                                </h5>
+                                <p class="card-text">
+                                    <%= note.content %>
+                                </p>
+                                <p class="card-text"><small class="text-muted">
+                                        Last updated:
+                                        <%= (note.updatedAt ? note.updatedAt.toLocaleDateString() :
+                                            note.createdAt.toLocaleDateString()) %>
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <% }) %>
+                    <% } else { %>
+                        <div class="row">
+                            <div class=" col text-end ">
+                                <img src="/images/human-3.svg">
+                            </div>
+                            <div class="col mt-md-4">
+                                <h2>Okay ...</h2>
+                                <h4>Let's start with your first note</h4>
+                                <a href="/dashboard/add" class="text-decoration-none create-one ">
+                                    <h4>Create One</h4>
+                                </a>
+                            </div>
+
+                        </div>
+                        <% } %>
+    </div>
+
+
+</div>

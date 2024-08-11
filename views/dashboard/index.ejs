@@ -1,12 +1,97 @@
-<div class="container-fluid container-fluid-costum py-mid-5 mb-5">
-    <main>
-        <div class="row py-md-5 text-center justify-content-center">
-            <div class="col-md-12 col-lg-6 mb-md-0">
-                <h1 class="display-2 fw-bold mb-4 position home-title position-relative ">
-                    Dashboard
-                </h1>
-                <p class="fs-4 mb-4">
-                    dashboard
-                </p>
-                <a href="/auth/google"><button type="button" class="btn btn-primary">Try it now for free</button></a>
-            </div>
+<div class="container-fluid container-fluid-costum pb-5 mb-5">
+    <div class="row mb-4">
+        <div class="col ">
+            <h1 class=" text-start">Hey, <%= local.username %>
+            </h1>
+        </div>
+        <div class="col text-end">
+            <a href="/dashboard/add" class="btn btn-primary">Add New</a>
+        </div>
+    </div>
+    <div class="row g-3 mb-4">
+        <% if (notes.length> 0) { %>
+            <% notes.forEach(note=> { %>
+                <div class="col-md-3">
+                    <a href="/dashboard/item/<%= note._id %> " class="text-decoration-none h-100">
+                        <div class="card mb-4 h-100">
+                            <div class="card-body border-primary">
+                                <h5 class="card-title">
+                                    <%= note.title %>
+                                </h5>
+                                <p class="card-text">
+                                    <%= note.content %>
+                                </p>
+                                <p class="card-text"><small class="text-muted">
+                                        Last updated:
+                                        <%= (note.updatedAt ? note.updatedAt.toLocaleDateString() :
+                                            note.createdAt.toLocaleDateString()) %>
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <% }) %>
+                    <% } else { %>
+                        <div class="row">
+                            <div class=" col text-end ">
+                                <img src="/images/human-3.svg">
+                            </div>
+                            <div class="col mt-md-4">
+                                <h2>Okay ...</h2>
+                                <h4>Let's start with your first note</h4>
+                                <a href="/dashboard/add" class="text-decoration-none create-one ">
+                                    <h4>Create One</h4>
+                                </a>
+                            </div>
+
+                        </div>
+                        <% } %>
+    </div>
+    <!-- Pagination Controls -->
+    <div class="container-fluid">
+        <nav aria-label="Page navigation example" class="text-end">
+            <ul class="pagination justify-content-center">
+                <% if (current> 1) { %>
+                    <li class="page-item">
+                        <a class="page-link" href="/dashboard/?page=<%= current - 1 %>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <% } else { %>
+                        <li class="page-item disabled">
+                            <span class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </span>
+                        </li>
+                        <% } %>
+
+                            <% for (let i=1; i <=pages; i++) { %>
+                                <li class="page-item <%= i === current ? 'active' : '' %>">
+                                    <a class="page-link" href="/dashboard/?page=<%= i %> ">
+                                        <%= i %>
+                                    </a>
+                                </li>
+                                <% } %>
+
+                                    <% if (current < pages) { %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="/dashboard/?page=<%= current + 1 %>"
+                                                aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                        <% } else { %>
+                                            <li class="page-item disabled">
+                                                <span class="page-link" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </span>
+                                            </li>
+                                            <% } %>
+            </ul>
+        </nav>
+    </div>
+
+
+
+</div>

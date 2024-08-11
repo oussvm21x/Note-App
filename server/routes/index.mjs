@@ -1,4 +1,3 @@
-import express from 'express';
 import { homepage, about } from '../controllers/main.mjs';
 import { Router } from 'express';
 

@@ -24,6 +24,10 @@ h6 {
     font-weight: 800;
 }
 
+.container-fluid-custom {
+    max-width: 1600px;
+}
+
 /* BUTTONS */
 .btn-outline-primary {
     --bs-btn-color: var(--bs-primary-rgb);
@@ -141,4 +145,25 @@ h6 {
     width: 110px;
     background: blue;
 
+}
+
+.create-one {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.create-one:hover {
+    color: var(--bs-primary-rgb);
+    /* Bootstrap primary color or your preferred color */
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    /* Slightly zooms in */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Adds a shadow */
 }
